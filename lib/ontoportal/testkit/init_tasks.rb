@@ -61,6 +61,10 @@ module Ontoportal
           .map(&:strip)
           .reject(&:empty?)
 
+        # Re-running init keeps writing to the configured path, so it never
+        # overwrites a component's own ./Dockerfile
+        dockerfile = (ENV["DOCKERFILE"] || Ontoportal::Testkit::ComponentConfig.new.dockerfile).to_s.strip
+
         [
           {
             path: Ontoportal::Testkit::ComponentConfig::DEFAULT_PATH,
@@ -68,11 +72,12 @@ module Ontoportal
               template_path(".ontoportal-testkit.yml.erb"),
               component_name: component_name,
               app_service: app_service,
+              dockerfile: dockerfile,
               dependency_services: dependency_services
             )
           },
           {
-            path: "Dockerfile",
+            path: dockerfile,
             content: read_template(template_path("Dockerfile"))
           },
           {

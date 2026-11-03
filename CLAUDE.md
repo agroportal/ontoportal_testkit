@@ -83,7 +83,7 @@ Each of these can be set individually when you want partial dev behavior.
 
 ### Init scaffolding
 
-`test:testkit:init` renders four files into a consumer repo from `templates/init/`: the component config, a thin `Dockerfile` that `FROM`s `ontoportal/testkit-base`, the `rakelib/ontoportal_testkit.rake` loader, and a GitHub Actions workflow. `required_scaffold_paths` (config + Dockerfile) are preflight-checked before any `test:docker:*` task runs; missing files abort with a pointer to `init`.
+`test:testkit:init` renders four files into a consumer repo from `templates/init/`: the component config, a thin `Dockerfile` that `FROM`s `ontoportal/testkit-base`, the `rakelib/ontoportal_testkit.rake` loader, and a GitHub Actions workflow. `required_scaffold_paths` (config + the `dockerfile` it names, default `Dockerfile`) are preflight-checked before any `test:docker:*` task runs; missing files abort with a pointer to `init`.
 
 Running `init` without `[force]` prints a diff against existing files and prompts interactively before overwriting. Integration smoke runs pass `[force]` to avoid the prompt.
 

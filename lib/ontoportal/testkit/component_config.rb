@@ -4,6 +4,7 @@ module Ontoportal
   module Testkit
     class ComponentConfig
       DEFAULT_PATH = ".ontoportal-testkit.yml".freeze
+      DEFAULT_DOCKERFILE = "Dockerfile".freeze
 
       attr_reader :path, :raw
 
@@ -18,6 +19,10 @@ module Ontoportal
 
       def app_service
         raw.fetch("app_service", "test-container")
+      end
+
+      def dockerfile
+        raw.fetch("dockerfile", DEFAULT_DOCKERFILE)
       end
 
       def backends
