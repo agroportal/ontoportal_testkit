@@ -4,6 +4,9 @@ services:
       GOO_BACKEND_NAME: '4store'
       GOO_HOST: 4store-ut
       GOO_PORT: 9000
+      GOO_PATH_QUERY: /sparql/
+      GOO_PATH_DATA: /data/
+      GOO_PATH_UPDATE: /update/
     depends_on:
       solr-ut:
         condition: service_healthy
