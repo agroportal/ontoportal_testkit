@@ -5,6 +5,7 @@ namespace :test do
       cfg = Ontoportal::Testkit::ComponentConfig.new
       puts "component_name: #{cfg.component_name}"
       puts "app_service: #{cfg.app_service}"
+      puts "dockerfile: #{cfg.dockerfile}"
       puts "backends: #{cfg.backends.join(", ")}"
       puts "dependency_services: #{cfg.dependency_services.join(", ")}"
     end

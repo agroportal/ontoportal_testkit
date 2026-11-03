@@ -1,5 +1,8 @@
 component_name: <%= component_name %>
 app_service: <%= app_service %>
+<% unless dockerfile == Ontoportal::Testkit::ComponentConfig::DEFAULT_DOCKERFILE -%>
+dockerfile: <%= dockerfile %>
+<% end -%>
 backends:
   - fs
   - ag
