@@ -23,7 +23,7 @@ module Ontoportal
         ag: {
           label: "AllegroGraph",
           host_env: {
-            "GOO_BACKEND_NAME" => "ag",
+            "GOO_BACKEND_NAME" => "allegrograph",
             "GOO_PORT" => "10035",
             "GOO_PATH_QUERY" => "/repositories/ontoportal_test",
             "GOO_PATH_DATA" => "/repositories/ontoportal_test/statements",
