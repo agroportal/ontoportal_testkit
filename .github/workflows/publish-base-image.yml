@@ -9,11 +9,11 @@ on:
       ruby_version:
         description: "Ruby version for the base image"
         required: true
-        default: "3.2"
+        default: "3.4.12"
       distro:
         description: "Debian distro suffix"
         required: true
-        default: "bullseye"
+        default: "bookworm"
       push_image:
         description: "Push to Docker Hub (false builds only)"
         required: true
@@ -26,8 +26,8 @@ jobs:
       contents: read
     env:
       IMAGE_NAME: ontoportal/testkit-base
-      RUBY_VERSION: ${{ github.event.inputs.ruby_version || '3.2' }}
-      DISTRO: ${{ github.event.inputs.distro || 'bullseye' }}
+      RUBY_VERSION: ${{ github.event.inputs.ruby_version || '3.4.12' }}
+      DISTRO: ${{ github.event.inputs.distro || 'bookworm' }}
       SHOULD_PUSH: ${{ github.event_name == 'release' || github.event.inputs.push_image == 'true' }}
     steps:
       - name: Checkout
@@ -56,7 +56,7 @@ jobs:
             type=raw,value=${{ github.ref_name }}-ruby${{ env.RUBY_VERSION }}-${{ env.DISTRO }},enable=${{ github.event_name == 'release' }}
             type=raw,value=ruby${{ env.RUBY_VERSION }}-${{ env.DISTRO }}
             type=raw,value=sha-${{ github.sha }}
-            type=raw,value=latest,enable=${{ env.RUBY_VERSION == '3.2' && env.DISTRO == 'bullseye' }}
+            type=raw,value=latest,enable=${{ env.RUBY_VERSION == '3.4.12' && env.DISTRO == 'bookworm' }}
 
       - name: Build and push base image
         uses: docker/build-push-action@v7

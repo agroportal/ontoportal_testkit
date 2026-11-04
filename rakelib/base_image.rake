@@ -5,8 +5,8 @@ namespace :test do
     namespace :docker do
       desc "Build shared testkit base image (args: ruby_version,distro,tag,push)"
       task :build_base, [:ruby_version, :distro, :tag, :push] do |_t, args|
-        ruby_version = args[:ruby_version] || ENV["RUBY_VERSION"] || "3.2"
-        distro = args[:distro] || ENV["DISTRO"] || "bullseye"
+        ruby_version = args[:ruby_version] || ENV["RUBY_VERSION"] || "3.4.12"
+        distro = args[:distro] || ENV["DISTRO"] || "bookworm"
         default_tag = "ontoportal/testkit-base:ruby#{ruby_version}-#{distro}"
         tag = args[:tag] || ENV["TESTKIT_BASE_TAG"] || default_tag
         push = (args[:push] || ENV["TESTKIT_BASE_PUSH"] || "false") == "true"
