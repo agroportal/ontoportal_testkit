@@ -29,6 +29,7 @@ bundle exec rake test:testkit:init
 
 This creates `.ontoportal-testkit.yml`, `Dockerfile`, `rakelib/ontoportal_testkit.rake` (task loader), and `.github/workflows/testkit-unit-tests.yml` if missing.
 If `./Dockerfile` already builds something else (e.g. a production image), set `dockerfile:` in `.ontoportal-testkit.yml` (or `DOCKERFILE=` at init) to use another path for the test image.
+If the test image is a stage of a multi-stage Dockerfile, name it with `target:`; without it the last stage is built.
 If you do not want the `rakelib` loader file, you can instead add this in component `Rakefile`:
 
 ```ruby

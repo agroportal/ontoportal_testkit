@@ -6,6 +6,7 @@ namespace :test do
       puts "component_name: #{cfg.component_name}"
       puts "app_service: #{cfg.app_service}"
       puts "dockerfile: #{cfg.dockerfile}"
+      puts "target: #{cfg.target}"
       puts "backends: #{cfg.backends.join(", ")}"
       puts "dependency_services: #{cfg.dependency_services.join(", ")}"
     end

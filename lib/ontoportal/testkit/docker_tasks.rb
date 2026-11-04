@@ -230,7 +230,8 @@ module Ontoportal
         component_dir = Shellwords.escape(Dir.pwd)
         testkit_root = Shellwords.escape(TESTKIT_ROOT)
         dockerfile = Shellwords.escape(component_config.dockerfile)
-        "OPTK_TESTKIT_ROOT=#{testkit_root} OPTK_DOCKERFILE=#{dockerfile} docker compose --project-directory #{component_dir} -p #{compose_scope} #{compose_files(files)}"
+        target = Shellwords.escape(component_config.target)
+        "OPTK_TESTKIT_ROOT=#{testkit_root} OPTK_DOCKERFILE=#{dockerfile} OPTK_DOCKER_TARGET=#{target} docker compose --project-directory #{component_dir} -p #{compose_scope} #{compose_files(files)}"
       end
 
       def required_scaffold_paths
