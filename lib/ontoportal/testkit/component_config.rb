@@ -5,6 +5,8 @@ module Ontoportal
     class ComponentConfig
       DEFAULT_PATH = ".ontoportal-testkit.yml".freeze
       DEFAULT_DOCKERFILE = "Dockerfile".freeze
+      # Empty builds the Dockerfile's last stage, as plain `docker build` does
+      DEFAULT_TARGET = "".freeze
 
       attr_reader :path, :raw
 
@@ -23,6 +25,10 @@ module Ontoportal
 
       def dockerfile
         raw.fetch("dockerfile", DEFAULT_DOCKERFILE)
+      end
+
+      def target
+        raw.fetch("target", DEFAULT_TARGET)
       end
 
       def backends

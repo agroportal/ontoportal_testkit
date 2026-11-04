@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ${OPTK_DOCKERFILE:-Dockerfile}
+      target: ${OPTK_DOCKER_TARGET:-}
       args:
         TESTKIT_BASE_IMAGE: ${TESTKIT_BASE_IMAGE:-ontoportal/testkit-base:ruby3.2-bullseye}
     command: ["bash", "-lc", "bundle exec rake test"]
