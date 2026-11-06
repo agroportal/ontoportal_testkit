@@ -7,6 +7,7 @@ module Ontoportal
       DEFAULT_DOCKERFILE = "Dockerfile".freeze
       # Empty builds the Dockerfile's last stage, as plain `docker build` does
       DEFAULT_TARGET = "".freeze
+      RUBY_VERSION_FILE = ".ruby-version".freeze
 
       attr_reader :path, :raw
 
@@ -37,6 +38,13 @@ module Ontoportal
 
       def dependency_services
         Array(raw.fetch("dependency_services", []))
+      end
+
+      # The component's pinned Ruby (e.g. "3.4.12"); nil without .ruby-version
+      def ruby_version
+        return unless File.exist?(RUBY_VERSION_FILE)
+
+        File.read(RUBY_VERSION_FILE).strip
       end
 
       private

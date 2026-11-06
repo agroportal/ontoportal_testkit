@@ -27,7 +27,7 @@ bundle exec rake "test:docker:shell[fs]"         # interactive shell in the test
 Docker base-image build (arch + tag args are positional):
 
 ```bash
-bundle exec rake "test:testkit:docker:build_base[3.2,bullseye,ontoportal/testkit-base:ruby3.2-bullseye,true]"
+bundle exec rake "test:testkit:docker:build_base[3.4.12,bookworm,ontoportal/testkit-base:ruby3.4.12-bookworm,true]"
 ```
 
 Maintainer integration smoke (this repo only — not shipped to consumers):

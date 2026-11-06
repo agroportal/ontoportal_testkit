@@ -231,7 +231,13 @@ module Ontoportal
         testkit_root = Shellwords.escape(TESTKIT_ROOT)
         dockerfile = Shellwords.escape(component_config.dockerfile)
         target = Shellwords.escape(component_config.target)
-        "OPTK_TESTKIT_ROOT=#{testkit_root} OPTK_DOCKERFILE=#{dockerfile} OPTK_DOCKER_TARGET=#{target} docker compose --project-directory #{component_dir} -p #{compose_scope} #{compose_files(files)}"
+
+        # .ruby-version becomes the OPTK_RUBY_VERSION build arg (see base.yml).
+        # Unset without the file, so the Dockerfile's own default applies.
+        ruby_version = component_config.ruby_version
+        ruby_env = ruby_version ? " OPTK_RUBY_VERSION=#{Shellwords.escape(ruby_version)}" : ""
+
+        "OPTK_TESTKIT_ROOT=#{testkit_root} OPTK_DOCKERFILE=#{dockerfile} OPTK_DOCKER_TARGET=#{target}#{ruby_env} docker compose --project-directory #{component_dir} -p #{compose_scope} #{compose_files(files)}"
       end
 
       def required_scaffold_paths

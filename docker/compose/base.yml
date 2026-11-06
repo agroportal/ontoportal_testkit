@@ -5,8 +5,12 @@ services:
       context: .
       dockerfile: ${OPTK_DOCKERFILE:-Dockerfile}
       target: ${OPTK_DOCKER_TARGET:-}
+      # No defaults: each is passed only when set, so the component
+      # Dockerfile's ARG defaults apply otherwise. The testkit sets
+      # OPTK_RUBY_VERSION from the component's .ruby-version.
       args:
-        TESTKIT_BASE_IMAGE: ${TESTKIT_BASE_IMAGE:-ontoportal/testkit-base:ruby3.2-bullseye}
+        - TESTKIT_BASE_IMAGE
+        - OPTK_RUBY_VERSION
     command: ["bash", "-lc", "bundle exec rake test"]
     environment:
       COVERAGE: 'true' # enable simplecov code coverage
