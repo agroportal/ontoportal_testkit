@@ -109,6 +109,10 @@ COPY . ./
 CMD ["bundle", "exec", "rake"]
 ```
 
+The testkit passes the component's `.ruby-version` as the `OPTK_RUBY_VERSION` build arg.
+Declare `ARG OPTK_RUBY_VERSION` and use it in place of `RUBY_VERSION` to keep `.ruby-version` the single source.
+Exporting `TESTKIT_BASE_IMAGE` overrides the base image.
+
 ## Local Development
 
 Initialize scaffold files before running docker tasks in this repo:

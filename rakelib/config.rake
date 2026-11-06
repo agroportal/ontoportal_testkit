@@ -9,6 +9,7 @@ namespace :test do
       puts "target: #{cfg.target}"
       puts "backends: #{cfg.backends.join(", ")}"
       puts "dependency_services: #{cfg.dependency_services.join(", ")}"
+      puts "ruby_version: #{cfg.ruby_version}"
     end
   end
 end

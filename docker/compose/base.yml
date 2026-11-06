@@ -5,10 +5,12 @@ services:
       context: .
       dockerfile: ${OPTK_DOCKERFILE:-Dockerfile}
       target: ${OPTK_DOCKER_TARGET:-}
-      # No default: passed only when exported, so the component Dockerfile's
-      # ARG default picks the base image (and its Ruby) unless overridden.
+      # No defaults: each is passed only when set, so the component
+      # Dockerfile's ARG defaults apply otherwise. The testkit sets
+      # OPTK_RUBY_VERSION from the component's .ruby-version.
       args:
         - TESTKIT_BASE_IMAGE
+        - OPTK_RUBY_VERSION
     command: ["bash", "-lc", "bundle exec rake test"]
     environment:
       COVERAGE: 'true' # enable simplecov code coverage
