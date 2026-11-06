@@ -5,8 +5,10 @@ services:
       context: .
       dockerfile: ${OPTK_DOCKERFILE:-Dockerfile}
       target: ${OPTK_DOCKER_TARGET:-}
+      # No default: passed only when exported, so the component Dockerfile's
+      # ARG default picks the base image (and its Ruby) unless overridden.
       args:
-        TESTKIT_BASE_IMAGE: ${TESTKIT_BASE_IMAGE:-ontoportal/testkit-base:ruby3.4.12-bookworm}
+        - TESTKIT_BASE_IMAGE
     command: ["bash", "-lc", "bundle exec rake test"]
     environment:
       COVERAGE: 'true' # enable simplecov code coverage
