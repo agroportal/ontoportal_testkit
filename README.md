@@ -66,13 +66,13 @@ This builds both `linux/amd64` and `linux/arm64/v8` images as a local OCI archiv
 To push a multi-arch manifest to Docker Hub, pass `push=true`:
 
 ```bash
-bundle exec rake "test:testkit:docker:build_base[3.2,bullseye,ontoportal/testkit-base:ruby3.2-bullseye,true]"
+bundle exec rake "test:testkit:docker:build_base[3.4.12,bookworm,ontoportal/testkit-base:ruby3.4.12-bookworm,true]"
 ```
 
 You can override version/tag:
 
 ```bash
-bundle exec rake "test:testkit:docker:build_base[3.2,bullseye,ontoportal/testkit-base:ruby3.2-bullseye]"
+bundle exec rake "test:testkit:docker:build_base[3.4.12,bookworm,ontoportal/testkit-base:ruby3.4.12-bookworm]"
 ```
 
 GitHub Actions workflow:
@@ -81,8 +81,8 @@ GitHub Actions workflow:
 - Publishes on GitHub Release (`published`) or manual dispatch
 - Supports manual dispatch with `ruby_version`, `distro`, `push_image`
 - Docker Hub repo: `ontoportal/testkit-base`
-- Release publishes immutable versioned tags like `v0.1.0-ruby3.2-bullseye`
-- Also updates moving aliases like `ruby3.2-bullseye` (and `latest` for default line)
+- Release publishes immutable versioned tags like `v0.1.0-ruby3.4.12-bookworm`
+- Also updates moving aliases like `ruby3.4.12-bookworm` (and `latest` for default line)
 
 Validation workflow:
 
@@ -97,8 +97,8 @@ Required repository secrets:
 Consumer component `Dockerfile` pattern:
 
 ```dockerfile
-ARG RUBY_VERSION=3.2
-ARG DISTRO=bullseye
+ARG RUBY_VERSION=3.4.12
+ARG DISTRO=bookworm
 ARG TESTKIT_BASE_IMAGE=ontoportal/testkit-base:ruby${RUBY_VERSION}-${DISTRO}
 FROM ${TESTKIT_BASE_IMAGE}
 
@@ -108,6 +108,10 @@ RUN bundle install --jobs 4 --retry 3
 COPY . ./
 CMD ["bundle", "exec", "rake"]
 ```
+
+The testkit passes the component's `.ruby-version` as the `OPTK_RUBY_VERSION` build arg.
+Declare `ARG OPTK_RUBY_VERSION` and use it in place of `RUBY_VERSION` to keep `.ruby-version` the single source.
+Exporting `TESTKIT_BASE_IMAGE` overrides the base image.
 
 ## Local Development
 
