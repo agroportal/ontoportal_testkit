@@ -28,7 +28,7 @@ jobs:
           context: .
           file: docker/base/Dockerfile
           build-args: |
-            RUBY_VERSION=3.4.12
+            RUBY_VERSION=3.4.13
             DISTRO=bookworm
           push: false
           platforms: linux/amd64,linux/arm64/v8
